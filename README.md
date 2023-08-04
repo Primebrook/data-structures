@@ -9,5 +9,5 @@ Dependencies:
 
 In the root directory:
 
-    1. Run `make` to build the project.
-    1. Run `bin/test_ds` to run the tests.
+1. Run `make` to build the project.
+2. Run `bin/test_ds` to run the tests.
