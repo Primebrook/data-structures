@@ -11,7 +11,7 @@ Dependencies:
 In the root directory:
 
 1. Run `make` to build the project.
-2. Run `bin/test_ds` to run the tests.
+2. Run `make run` to run the program (which is just running the test suite atm).
 
 I'm using `clang-format` to format the code. It can be installed with homebrew with `brew install clang-format`.
 To run the formatter run `make format`.

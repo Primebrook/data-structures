@@ -3,7 +3,10 @@ CFLAGS = -I include/
 DEPS = include/array.h include/test_array.h
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o) 
-OUTPUT = bin/test_ds
+OUTPUT = bin/test_data_structures
+
+run: $(OUTPUT)
+	bin/test_data_structures
 
 $(OUTPUT): $(OBJ)
 	mkdir -p bin
@@ -18,5 +21,5 @@ format:
 clean:
 	rm -rf $(OBJ) bin/
 
-.PHONY: format
+.PHONY: format run clean
 
