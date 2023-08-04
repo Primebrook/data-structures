@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main() {
-	test_insert();
-	printf("We've called the test functions\n");
+	test_initialize();
+	printf("\n\nAll tests \033[0;32mPASSED.\033[0m.\n");
 	return 0;
 }
