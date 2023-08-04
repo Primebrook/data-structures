@@ -1,11 +1,14 @@
 CC = clang
 CFLAGS = -I include/
 DEPS = include/array.h include/test_array.h
-OBJ = src/main.o src/array.o src/test_array.o
+SRC = $(wildcard src/*.c)
+OBJ = $(SRC:.c=.o) 
+OUTPUT = bin/test_ds
+
+$(OUTPUT): $(OBJ)
+	mkdir -p bin
+	$(CC) -o $@ $^ $(CFLAGS)
 
 src/%.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
-
-test_ds: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
 

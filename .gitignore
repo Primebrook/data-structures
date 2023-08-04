@@ -1,0 +1,4 @@
+*.o
+
+# Ignore all executables
+bin/*
