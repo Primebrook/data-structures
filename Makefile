@@ -15,4 +15,8 @@ src/%.o: src/%.c $(DEPS)
 format:
 	@find . -iname "*.c" -o -iname "*.h" | xargs clang-format -i
 
+clean:
+	rm -rf $(OBJ) bin/
+
 .PHONY: format
+
