@@ -1,10 +1,10 @@
-Data Stuctures, their operations and tests.
+Data Stuctures, their operations and some tests.
 
 This program runs tests on the data structures and their operations. 
 
 Dependencies: 
 
-    - Clang
+    - clang
     - make
     - clang-format
 
