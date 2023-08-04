@@ -6,6 +6,7 @@ Dependencies:
 
     - Clang
     - make
+    - clang-format
 
 In the root directory:
 
