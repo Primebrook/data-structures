@@ -12,3 +12,7 @@ $(OUTPUT): $(OBJ)
 src/%.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+format:
+	@find . -iname "*.c" -o -iname "*.h" | xargs clang-format -i
+
+.PHONY: format
