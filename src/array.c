@@ -9,21 +9,27 @@
 // Initialize a dynamic array with the given initial capacity and data type
 DynamicArray *initialize(size_t initial_capacity, DataType type) {
     // Check if the specified data type is valid
-    if (type != INT && type != FLOAT && type != DOUBLE && type != CHAR) {
-        fprintf(stderr, "Error: Invalid data type.\n");
-        exit(EXIT_FAILURE);
+    switch (type) {
+        case INT:
+        case FLOAT:
+        case DOUBLE:
+        case CHAR:
+            break; // Valid data type
+        default:
+            fprintf(stderr, "Error: Invalid data type.\n");
+            exit(EXIT_FAILURE);
     }
 
     DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
     if (dy_arr_ptr == NULL) {
-        fprintf(stderr, "Error: Failed to allocate memory for dynamic array.\n");
+        perror("Error: Failed to allocate memory for dynamic array.");
         exit(EXIT_FAILURE);
     }
 
     dy_arr_ptr->data = malloc(initial_capacity * getDataTypeSize(type));
     if (dy_arr_ptr->data == NULL) {
         free(dy_arr_ptr);
-        fprintf(stderr, "Error: Failed to allocate memory for dynamic array data.\n");
+        perror("Error: Failed to allocate memory for dynamic array data.");
         exit(EXIT_FAILURE);
     }
 
