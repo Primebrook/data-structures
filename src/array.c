@@ -6,16 +6,67 @@
 #define INITIAL_CAPACITY 10
 #define GROWTH_FACTOR 2 // The factor by which the capacity will increase
 
+typedef struct {
+    void *data;
+    size_t size;
+    size_t capacity;
+    DataType type;
+} DynamicArray;
+
 void handleError(const char *message) {
     fprintf(stderr, "%s\n", message);
+    exit(EXIT_FAILURE);
 }
 
-// Add a value to the dynamic array
+void checkPointerAndIndex(DynamicArray *dy_arr_ptr, int index) {
+    if (dy_arr_ptr == NULL || dy_arr_ptr->data == NULL || index >= dy_arr_ptr->size) {
+        handleError("Error: Invalid dynamic array or index.");
+    }
+}
+
+DynamicArray *initialize(size_t initial_capacity, DataType type) {
+    // Check if the specified data type is valid
+    switch (type) {
+        case INT:
+        case FLOAT:
+        case DOUBLE:
+        case CHAR:
+            break; // Valid data type
+        default:
+            handleError("Error: Invalid data type.");
+    }
+
+    DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
+    if (dy_arr_ptr == NULL) {
+        handleError("Error: Failed to allocate memory for dynamic array.");
+    }
+
+    dy_arr_ptr->data = calloc(initial_capacity, getDataTypeSize(type));
+    if (dy_arr_ptr->data == NULL) {
+        free(dy_arr_ptr);
+        handleError("Error: Failed to allocate memory for dynamic array data.");
+    }
+
+    dy_arr_ptr->size = 0;
+    dy_arr_ptr->capacity = initial_capacity;
+    dy_arr_ptr->type = type;
+    return dy_arr_ptr;
+}
+
+bool resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
+    void *new_data = realloc(dy_arr_ptr->data, new_capacity * getDataTypeSize(dy_arr_ptr->type));
+    if (new_data == NULL) {
+        handleError("Failed to resize dynamic array.");
+    }
+    dy_arr_ptr->data = new_data;
+    dy_arr_ptr->capacity = new_capacity;
+    return true;
+}
+
 void add(DynamicArray *dy_arr_ptr, void *value) {
     checkPointerAndIndex(dy_arr_ptr, dy_arr_ptr->size);
 
     if (dy_arr_ptr->size == dy_arr_ptr->capacity) {
-        // Array is full, resize it
         size_t new_capacity = dy_arr_ptr->capacity * GROWTH_FACTOR;
         resize(dy_arr_ptr, new_capacity);
     }
