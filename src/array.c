@@ -57,6 +57,7 @@ bool resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
     void *new_data = realloc(dy_arr_ptr->data, new_capacity * getDataTypeSize(dy_arr_ptr->type));
     if (new_data == NULL) {
         handleError("Failed to resize dynamic array.");
+        return false; // Return false on error
     }
     dy_arr_ptr->data = new_data;
     dy_arr_ptr->capacity = new_capacity;
