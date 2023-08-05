@@ -6,5 +6,5 @@ typedef struct {
 
 DynamicArray *initialize(int initial_capacity, int initial_size);
 DynamicArray *insert(DynamicArray *dy_arr, int pos, int value);
-int *resize(int *data, int size);
+int resize(DynamicArray *dy_arr, int new_capacity);
 // etc etc

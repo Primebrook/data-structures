@@ -3,30 +3,37 @@
 #include <stdlib.h>
 
 DynamicArray *initialize(int initial_capacity, int initial_size) {
-    DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
+    DynamicArray *dy_arr = malloc(sizeof(DynamicArray));
 
-    if (dy_arr_ptr == NULL) {
+    if (dy_arr == NULL) {
         fprintf(stderr, "Failed to allocate memory for dynamic array.\n");
         exit(EXIT_FAILURE);
     };
 
-    dy_arr_ptr->data = (int *)malloc(initial_capacity * sizeof(int));
-    if (dy_arr_ptr->data == NULL) {
-        free(dy_arr_ptr);
+    dy_arr->data = (int *)malloc(initial_capacity * sizeof(int));
+    if (dy_arr->data == NULL) {
+        free(dy_arr);
         fprintf(stderr,
                 "Failed to allocation memory for dynamic array data.\n");
         exit(EXIT_FAILURE);
     };
 
-    dy_arr_ptr->size = initial_size;
-    dy_arr_ptr->capacity = initial_capacity;
-    return dy_arr_ptr;
+    dy_arr->size = initial_size;
+    dy_arr->capacity = initial_capacity;
+    return dy_arr;
 };
 
 DynamicArray *insert(DynamicArray *dy_arr, int pos, int value) {
+    if (pos > dy_arr->capacity) {
+        // DynamicArray* resized_dy_arr = resize(dy_arr, size);
+    };
+
     if (dy_arr->size == dy_arr->capacity) {
-        int *new_data = resize(dy_arr->data, 1);
-        dy_arr->data = new_data;
+        int resized = resize(dy_arr, dy_arr->capacity + 1);
+        if (resized == 0) {
+            fprintf(stderr, "Failed to reallocate memory for resizing.\n");
+            exit(EXIT_FAILURE);
+        };
     };
 
     for (int i = dy_arr->size; i >= pos; i--) {
@@ -38,11 +45,22 @@ DynamicArray *insert(DynamicArray *dy_arr, int pos, int value) {
     return dy_arr;
 };
 
-int *resize(int *data, int size) {
-    int *new_data = (int *)realloc(data, sizeof(int) * (size + 1));
+int resize(DynamicArray *dy_arr, int new_capacity) {
+    int *new_data = realloc(dy_arr->data, sizeof(int) * new_capacity);
     if (new_data == NULL) {
-        fprintf(stderr, "Failed to reallocate memory fo dynamic array data.\n");
-        exit(EXIT_FAILURE);
+        return 0;
     };
-    return new_data;
+
+    dy_arr->data = new_data;
+    dy_arr->capacity = new_capacity;
+    return 1;
 };
+
+// int *resize(int *data, int size) {
+//     int *new_data = (int *)realloc(data, sizeof(int) * (size + 1));
+//     if (new_data == NULL) {
+//         fprintf(stderr, "Failed to reallocate memory fo dynamic array
+//         data.\n"); exit(EXIT_FAILURE);
+//     };
+//     return new_data;
+// };
