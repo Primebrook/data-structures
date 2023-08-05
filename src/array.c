@@ -13,6 +13,23 @@ typedef struct {
     DataType type;
 } DynamicArray;
 
+size_t getDataTypeSize(DataType type) {
+    switch (type) {
+        case INT:
+            return sizeof(int);
+        case FLOAT:
+            return sizeof(float);
+        case DOUBLE:
+            return sizeof(double);
+        case CHAR:
+            return sizeof(char);
+        // Handle other data types if needed
+        default:
+            // Handle invalid data type
+            return 0; // Or an appropriate error value
+    }
+}
+
 void handleError(const char *message) {
     fprintf(stderr, "%s\n", message);
     exit(EXIT_FAILURE);
