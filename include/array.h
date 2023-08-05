@@ -1,7 +1,7 @@
 typedef struct {
-  int size;
-  int capacity;
-  int *data;
+    int size;
+    int capacity;
+    int *data;
 } DynamicArray;
 
 DynamicArray *initialize(int initial_capacity);
