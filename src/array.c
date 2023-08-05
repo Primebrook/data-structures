@@ -122,6 +122,38 @@ void destroy(DynamicArray *dy_arr_ptr) {
     }
 }
 
+// Print the content of the dynamic array
+void print(DynamicArray *dy_arr_ptr) {
+    if (dy_arr_ptr == NULL) {
+        fprintf(stderr, "Dynamic array pointer is NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    size_t element_size = getDataTypeSize(dy_arr_ptr->type);
+    printf("Dynamic Array Content:\n");
+
+    for (size_t i = 0; i < dy_arr_ptr->size; ++i) {
+        void *value_ptr = (char *)dy_arr_ptr->data + i * element_size;
+
+        switch (dy_arr_ptr->type) {
+            case INT:
+                printf("%d ", *(int *)value_ptr);
+                break;
+            case FLOAT:
+                printf("%f ", *(float *)value_ptr);
+                break;
+            case DOUBLE:
+                printf("%lf ", *(double *)value_ptr);
+                break;
+            case CHAR:
+                printf("%c ", *(char *)value_ptr);
+                break;
+            // Add cases for other data types if needed
+        }
+    }
+    printf("\n");
+}
+
 int main() {
     DynamicArray *intArray = initialize(10, INT);
     DynamicArray *floatArray = initialize(10, FLOAT);
@@ -143,6 +175,11 @@ int main() {
     printf("Double value at index 0: %lf\n", *(double *)get(doubleArray, 0));
     printf("Char value at index 0: %c\n", *(char *)get(charArray, 0));
 
+    print(intArray);
+    print(floatArray);
+    print(doubleArray);
+    print(charArray);
+    
     destroy(intArray);
     destroy(floatArray);
     destroy(doubleArray);
