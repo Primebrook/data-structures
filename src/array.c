@@ -175,11 +175,12 @@ int main() {
     printf("Double value at index 0: %lf\n", *(double *)get(doubleArray, 0));
     printf("Char value at index 0: %c\n", *(char *)get(charArray, 0));
 
+    printf("Printing dynamic arrays:\n");
     print(intArray);
     print(floatArray);
     print(doubleArray);
     print(charArray);
-    
+
     destroy(intArray);
     destroy(floatArray);
     destroy(doubleArray);
