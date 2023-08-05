@@ -113,7 +113,11 @@ void clear(DynamicArray *dy_arr_ptr) {
         exit(EXIT_FAILURE);
     }
 
+    // Reset the size to 0
     dy_arr_ptr->size = 0;
+
+    // Resize the data array to the initial capacity to reclaim memory
+    resize(dy_arr_ptr, INITIAL_CAPACITY);
 }
 
 // Destroy the dynamic array and free memory
