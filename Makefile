@@ -1,25 +1,38 @@
 CC = clang
-CFLAGS = -I include/
-DEPS = include/array.h include/test_array.h
-SRC = $(wildcard src/*.c)
-OBJ = $(SRC:.c=.o) 
-OUTPUT = bin/test_data_structures
+CFLAGS = -Wall -Wextra -std=c99
+LIBS = -lcheck -lm -lpthread -lrt
 
-run: $(OUTPUT)
-	bin/test_data_structures
+SRCDIR = src
+TESTDIR = test
 
-$(OUTPUT): $(OBJ)
-	mkdir -p bin
-	$(CC) -o $@ $^ $(CFLAGS)
+SRCFILES = $(wildcard $(SRCDIR)/*.c)
+HDRFILES = $(wildcard $(SRCDIR)/*.h)
+TESTFILES = $(wildcard $(TESTDIR)/*.c)
 
-src/%.o: src/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+SRCOBJS = $(patsubst $(SRCDIR)/%.c, $(SRCDIR)/%.o, $(SRCFILES))
+TESTOBJS = $(patsubst $(TESTDIR)/%.c, $(TESTDIR)/%.o, $(TESTFILES))
 
-format:
-	@find . -iname "*.c" -o -iname "*.h" | xargs clang-format -i
+TARGET = dynamic_array
+TESTTARGET = test_dynamic_array
+
+.PHONY: all clean test
+
+all: $(TARGET)
+
+$(TARGET): $(SRCOBJS)
+	$(CC) $(CFLAGS) $(SRCOBJS) -o $(TARGET)
+
+$(SRCDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ) bin/
+	rm -f $(SRCOBJS) $(TESTOBJS) $(TARGET) $(TESTTARGET)
 
-.PHONY: format run clean
+test: $(TESTTARGET)
+	./$(TESTTARGET)
 
+$(TESTTARGET): $(TESTOBJS) $(SRCOBJS)
+	$(CC) $(CFLAGS) $(TESTOBJS) $(SRCOBJS) -o $(TESTTARGET) $(LIBS)
+
+$(TESTDIR)/%.o: $(TESTDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
