@@ -27,7 +27,7 @@ DynamicArray *initialize(size_t initial_capacity, DataType type) {
 }
 
 // Resize the dynamic array to the new capacity
-void resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
+void resizeDynamicArray(DynamicArray *dy_arr_ptr, size_t new_capacity) {
     void *new_data = realloc(dy_arr_ptr->data, new_capacity * getDataTypeSize(dy_arr_ptr->type));
     if (new_data == NULL) {
         fprintf(stderr, "Failed to resize dynamic array.\n");
@@ -62,7 +62,7 @@ void add(DynamicArray *dy_arr_ptr, void *value) {
     if (dy_arr_ptr->size == dy_arr_ptr->capacity) {
         // Array is full, resize it
         size_t new_capacity = dy_arr_ptr->capacity * GROWTH_FACTOR;
-        resize(dy_arr_ptr, new_capacity);
+        resizeDynamicArray(dy_arr_ptr, new_capacity);
     }
 
     size_t element_size = getDataTypeSize(dy_arr_ptr->type);
