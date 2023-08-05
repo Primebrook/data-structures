@@ -5,5 +5,5 @@ typedef struct {
 } DynamicArray;
 
 DynamicArray *initialize(int initial_capacity);
-void insert(); // what parameters should this take?
+DynamicArray *insert(DynamicArray *dy_arr, int pos, int value);
 // etc etc

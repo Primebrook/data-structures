@@ -22,3 +22,7 @@ DynamicArray *initialize(int initial_capacity) {
     dy_arr_ptr->capacity = initial_capacity;
     return dy_arr_ptr;
 };
+
+DynamicArray *insert(DynamicArray *dy_arr, int pos, int value) {
+    return dy_arr;
+};
