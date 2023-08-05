@@ -37,9 +37,8 @@ void resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
     dy_arr_ptr->capacity = new_capacity;
 }
 
-
-// Add a value to the dynamic array
-void add(DynamicArray *dy_arr_ptr, void *value) {
+// Helper function to check for NULL pointer and out-of-bounds index
+void checkPointerAndIndex(DynamicArray *dy_arr_ptr, size_t index) {
     if (dy_arr_ptr == NULL) {
         fprintf(stderr, "Dynamic array pointer is NULL.\n");
         exit(EXIT_FAILURE);
@@ -49,6 +48,16 @@ void add(DynamicArray *dy_arr_ptr, void *value) {
         fprintf(stderr, "Dynamic array data pointer is NULL.\n");
         exit(EXIT_FAILURE);
     }
+
+    if (index >= dy_arr_ptr->size) {
+        fprintf(stderr, "Index out of bounds.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Add a value to the dynamic array
+void add(DynamicArray *dy_arr_ptr, void *value) {
+    checkPointerAndIndex(dy_arr_ptr, dy_arr_ptr->size);
 
     if (dy_arr_ptr->size == dy_arr_ptr->capacity) {
         // Array is full, resize it
@@ -56,59 +65,28 @@ void add(DynamicArray *dy_arr_ptr, void *value) {
         resize(dy_arr_ptr, new_capacity);
     }
 
-    if (dy_arr_ptr->size < dy_arr_ptr->capacity) {
-        size_t element_size = getDataTypeSize(dy_arr_ptr->type);
-        void *destination = (char *)dy_arr_ptr->data + dy_arr_ptr->size * element_size;
-        memcpy(destination, value, element_size);
-        dy_arr_ptr->size++;
-    } else {
-        fprintf(stderr, "Array overflow.\n");
-        exit(EXIT_FAILURE);
-    }
+    size_t element_size = getDataTypeSize(dy_arr_ptr->type);
+    void *destination = (char *)dy_arr_ptr->data + dy_arr_ptr->size * element_size;
+    memcpy(destination, value, element_size);
+    dy_arr_ptr->size++;
 }
 
 // Get the value at the specified index
 void* get(DynamicArray *dy_arr_ptr, size_t index) {
-    if (dy_arr_ptr == NULL) {
-        fprintf(stderr, "Dynamic array pointer is NULL.\n");
-        exit(EXIT_FAILURE);
-    }
+    checkPointerAndIndex(dy_arr_ptr, index);
 
-    if (dy_arr_ptr->data == NULL) {
-        fprintf(stderr, "Dynamic array data pointer is NULL.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    if (index >= 0 && index < dy_arr_ptr->size) {
-        size_t element_size = getDataTypeSize(dy_arr_ptr->type);
-        void *value_ptr = (char *)dy_arr_ptr->data + index * element_size;
-        return value_ptr;
-    } else {
-        fprintf(stderr, "Index out of bounds.\n");
-        exit(EXIT_FAILURE);
-    }
+    size_t element_size = getDataTypeSize(dy_arr_ptr->type);
+    void *value_ptr = (char *)dy_arr_ptr->data + index * element_size;
+    return value_ptr;
 }
 
 // Set the value at the specified index
 void set(DynamicArray *dy_arr_ptr, size_t index, void *value) {
-    if (dy_arr_ptr == NULL) {
-        fprintf(stderr, "Dynamic array pointer is NULL.\n");
-        exit(EXIT_FAILURE);
-    }
+    checkPointerAndIndex(dy_arr_ptr, index);
 
-    if (dy_arr_ptr->data == NULL) {
-        fprintf(stderr, "Dynamic array data pointer is NULL.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    if (index < dy_arr_ptr->size) {
-        size_t element_size = getDataTypeSize(dy_arr_ptr->type);
-        void *destination = (char *)dy_arr_ptr->data + index * element_size;
-        memcpy(destination, value, element_size);
-    } else {
-        fprintf(stderr, "Index out of bounds.\n");
-        exit(EXIT_FAILURE);
-    }
+    size_t element_size = getDataTypeSize(dy_arr_ptr->type);
+    void *destination = (char *)dy_arr_ptr->data + index * element_size;
+    memcpy(destination, value, element_size);
 }
 
 // Get the current size of the dynamic array
