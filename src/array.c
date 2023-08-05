@@ -6,7 +6,7 @@
 #define GROWTH_FACTOR 2 // The factor by which the capacity will increase
 
 // Initialize a dynamic array with the given initial capacity and data type
-DynamicArray *initialize(int initial_capacity, DataType type) {
+DynamicArray *initialize(size_t initial_capacity, DataType type) {
     DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
     if (dy_arr_ptr == NULL) {
         fprintf(stderr, "Failed to allocate memory for dynamic array.\n");
@@ -80,7 +80,7 @@ void* get(DynamicArray *dy_arr_ptr, size_t index) {
 }
 
 // Set the value at the specified index
-void set(DynamicArray *dy_arr_ptr, int index, int value) {
+void set(DynamicArray *dy_arr_ptr, size_t index, int value) {
     if (dy_arr_ptr == NULL) {
         fprintf(stderr, "Dynamic array pointer is NULL.\n");
         exit(EXIT_FAILURE);
@@ -95,7 +95,7 @@ void set(DynamicArray *dy_arr_ptr, int index, int value) {
 }
 
 // Get the current size of the dynamic array
-int size(DynamicArray *dy_arr_ptr) {
+size_t size(DynamicArray *dy_arr_ptr) {
     if (dy_arr_ptr == NULL) {
         fprintf(stderr, "Dynamic array pointer is NULL.\n");
         exit(EXIT_FAILURE);
