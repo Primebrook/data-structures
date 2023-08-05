@@ -38,7 +38,7 @@ void resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
 }
 
 // Helper function to check for NULL pointer and out-of-bounds index
-void checkPointerAndIndex(DynamicArray *dy_arr_ptr, size_t index) {
+void checkPointerAndIndex(DynamicArray *dy_arr_ptr, int index) {
     if (dy_arr_ptr == NULL) {
         fprintf(stderr, "Dynamic array pointer is NULL.\n");
         exit(EXIT_FAILURE);
@@ -72,7 +72,7 @@ void add(DynamicArray *dy_arr_ptr, void *value) {
 }
 
 // Get the value at the specified index
-void* get(DynamicArray *dy_arr_ptr, size_t index) {
+void* get(DynamicArray *dy_arr_ptr, int index) {
     checkPointerAndIndex(dy_arr_ptr, index);
 
     size_t element_size = getDataTypeSize(dy_arr_ptr->type);
@@ -81,7 +81,7 @@ void* get(DynamicArray *dy_arr_ptr, size_t index) {
 }
 
 // Set the value at the specified index
-void set(DynamicArray *dy_arr_ptr, size_t index, void *value) {
+void set(DynamicArray *dy_arr_ptr, int index, void *value) {
     checkPointerAndIndex(dy_arr_ptr, index);
 
     size_t element_size = getDataTypeSize(dy_arr_ptr->type);
