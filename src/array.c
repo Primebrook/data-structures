@@ -6,66 +6,8 @@
 #define INITIAL_CAPACITY 10
 #define GROWTH_FACTOR 2 // The factor by which the capacity will increase
 
-// Initialize a dynamic array with the given initial capacity and data type
-DynamicArray *initialize(size_t initial_capacity, DataType type) {
-    // Check if the specified data type is valid
-    switch (type) {
-        case INT:
-        case FLOAT:
-        case DOUBLE:
-        case CHAR:
-            break; // Valid data type
-        default:
-            fprintf(stderr, "Error: Invalid data type.\n");
-            exit(EXIT_FAILURE);
-    }
-
-    DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
-    if (dy_arr_ptr == NULL) {
-        perror("Error: Failed to allocate memory for dynamic array.");
-        return NULL;
-    }
-
-    dy_arr_ptr->data = calloc(initial_capacity, getDataTypeSize(type));
-    if (dy_arr_ptr->data == NULL) {
-        free(dy_arr_ptr);
-        perror("Error: Failed to allocate memory for dynamic array data.");
-        return NULL;
-    }
-
-    dy_arr_ptr->size = 0;
-    dy_arr_ptr->capacity = initial_capacity;
-    dy_arr_ptr->type = type;
-    return dy_arr_ptr;
-}
-
-// Resize the dynamic array to the new capacity
-bool resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
-    void *new_data = realloc(dy_arr_ptr->data, new_capacity * getDataTypeSize(dy_arr_ptr->type));
-    if (new_data == NULL) {
-        fprintf(stderr, "Failed to resize dynamic array.\n");
-        return false;
-    }
-    dy_arr_ptr->data = new_data;
-    dy_arr_ptr->capacity = new_capacity;
-    return true;
-}
-// Helper function to check for NULL pointer and out-of-bounds index
-void checkPointerAndIndex(DynamicArray *dy_arr_ptr, int index) {
-    if (dy_arr_ptr == NULL) {
-        fprintf(stderr, "Dynamic array pointer is NULL.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    if (dy_arr_ptr->data == NULL) {
-        fprintf(stderr, "Dynamic array data pointer is NULL.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    if (index >= dy_arr_ptr->size) {
-        fprintf(stderr, "Index out of bounds.\n");
-        exit(EXIT_FAILURE);
-    }
+void handleError(const char *message) {
+    fprintf(stderr, "%s\n", message);
 }
 
 // Add a value to the dynamic array
@@ -126,6 +68,51 @@ void clear(DynamicArray *dy_arr_ptr) {
     resize(dy_arr_ptr, INITIAL_CAPACITY);
 }
 
+// Initialize a dynamic array with the given initial capacity and data type
+DynamicArray *initialize(size_t initial_capacity, DataType type) {
+    // Check if the specified data type is valid
+    switch (type) {
+        case INT:
+        case FLOAT:
+        case DOUBLE:
+        case CHAR:
+            break; // Valid data type
+        default:
+            handleError("Error: Invalid data type.");
+            return NULL;
+    }
+
+    DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
+    if (dy_arr_ptr == NULL) {
+        handleError("Error: Failed to allocate memory for dynamic array.");
+        return NULL;
+    }
+
+    dy_arr_ptr->data = calloc(initial_capacity, getDataTypeSize(type));
+    if (dy_arr_ptr->data == NULL) {
+        free(dy_arr_ptr);
+        perror("Error: Failed to allocate memory for dynamic array data.");
+        return NULL;
+    }
+
+    dy_arr_ptr->size = 0;
+    dy_arr_ptr->capacity = initial_capacity;
+    dy_arr_ptr->type = type;
+    return dy_arr_ptr;
+}
+
+// Resize the dynamic array to the new capacity
+bool resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
+    void *new_data = realloc(dy_arr_ptr->data, new_capacity * getDataTypeSize(dy_arr_ptr->type));
+    if (new_data == NULL) {
+        fprintf(stderr, "Failed to resize dynamic array.\n");
+        return false;
+    }
+    dy_arr_ptr->data = new_data;
+    dy_arr_ptr->capacity = new_capacity;
+    return true;
+}
+
 // Destroy the dynamic array and free memory
 void destroy(DynamicArray *dy_arr_ptr) {
     if (dy_arr_ptr != NULL) {
@@ -167,6 +154,24 @@ void print(DynamicArray *dy_arr_ptr) {
     printf("\n");
 }
 
+// Helper function to check for NULL pointer and out-of-bounds index
+void checkPointerAndIndex(DynamicArray *dy_arr_ptr, int index) {
+    if (dy_arr_ptr == NULL) {
+        fprintf(stderr, "Dynamic array pointer is NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (dy_arr_ptr->data == NULL) {
+        fprintf(stderr, "Dynamic array data pointer is NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (index >= dy_arr_ptr->size) {
+        fprintf(stderr, "Index out of bounds.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 // Function to free memory of a dynamic array
 void freeDynamicArray(DynamicArray *dy_arr_ptr) {
     destroy(dy_arr_ptr);
@@ -174,6 +179,10 @@ void freeDynamicArray(DynamicArray *dy_arr_ptr) {
 
 int main() {
     DynamicArray *intArray = initialize(INITIAL_CAPACITY, INT);
+    if (intArray == NULL) {
+        handleError("Failed to initialize intArray.");
+        return 1;
+    }
     DynamicArray *floatArray = initialize(INITIAL_CAPACITY, FLOAT);
     DynamicArray *doubleArray = initialize(INITIAL_CAPACITY, DOUBLE);
     DynamicArray *charArray = initialize(INITIAL_CAPACITY, CHAR);
