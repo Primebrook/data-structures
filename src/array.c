@@ -9,14 +9,14 @@
 DynamicArray *initialize(size_t initial_capacity, DataType type) {
     DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
     if (dy_arr_ptr == NULL) {
-        fprintf(stderr, "Failed to allocate memory for dynamic array.\n");
+        fprintf(stderr, "Error: Failed to allocate memory for dynamic array.\n");
         exit(EXIT_FAILURE);
     }
 
     dy_arr_ptr->data = malloc(initial_capacity * getDataTypeSize(type));
     if (dy_arr_ptr->data == NULL) {
         free(dy_arr_ptr);
-        fprintf(stderr, "Failed to allocate memory for dynamic array data.\n");
+        fprintf(stderr, "Error: Failed to allocate memory for dynamic array data.\n");
         exit(EXIT_FAILURE);
     }
 
