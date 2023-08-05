@@ -24,5 +24,16 @@ DynamicArray *initialize(int initial_capacity) {
 };
 
 DynamicArray *insert(DynamicArray *dy_arr, int pos, int value) {
+    if (dy_arr->size == dy_arr->capacity) {
+        fprintf(stderr, "STACK OVERFLOW!");
+        exit(EXIT_FAILURE);
+    };
+
+    for (int i = dy_arr->size; i >= pos; i--) {
+        dy_arr->data[i + 1] = dy_arr->data[i];
+    };
+
+    dy_arr->data[pos] = value; // actual insertion!
+    dy_arr->size++;
     return dy_arr;
 };
