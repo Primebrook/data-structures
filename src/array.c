@@ -45,6 +45,11 @@ void add(DynamicArray *dy_arr_ptr, void *value) {
         exit(EXIT_FAILURE);
     }
 
+    if (dy_arr_ptr->data == NULL) {
+        fprintf(stderr, "Dynamic array data pointer is NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     if (dy_arr_ptr->size == dy_arr_ptr->capacity) {
         // Array is full, resize it
         size_t new_capacity = dy_arr_ptr->capacity * GROWTH_FACTOR;
@@ -69,6 +74,11 @@ void* get(DynamicArray *dy_arr_ptr, size_t index) {
         exit(EXIT_FAILURE);
     }
 
+    if (dy_arr_ptr->data == NULL) {
+        fprintf(stderr, "Dynamic array data pointer is NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     if (index >= 0 && index < dy_arr_ptr->size) {
         size_t element_size = getDataTypeSize(dy_arr_ptr->type);
         void *value_ptr = (char *)dy_arr_ptr->data + index * element_size;
@@ -83,6 +93,11 @@ void* get(DynamicArray *dy_arr_ptr, size_t index) {
 void set(DynamicArray *dy_arr_ptr, size_t index, int value) {
     if (dy_arr_ptr == NULL) {
         fprintf(stderr, "Dynamic array pointer is NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (dy_arr_ptr->data == NULL) {
+        fprintf(stderr, "Dynamic array data pointer is NULL.\n");
         exit(EXIT_FAILURE);
     }
 
