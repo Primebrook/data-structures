@@ -90,7 +90,7 @@ void* get(DynamicArray *dy_arr_ptr, size_t index) {
 }
 
 // Set the value at the specified index
-void set(DynamicArray *dy_arr_ptr, size_t index, int value) {
+void set(DynamicArray *dy_arr_ptr, size_t index, void *value) {
     if (dy_arr_ptr == NULL) {
         fprintf(stderr, "Dynamic array pointer is NULL.\n");
         exit(EXIT_FAILURE);
@@ -101,8 +101,10 @@ void set(DynamicArray *dy_arr_ptr, size_t index, int value) {
         exit(EXIT_FAILURE);
     }
 
-    if (index >= 0 && index < dy_arr_ptr->size) {
-        dy_arr_ptr->data[index] = value;
+    if (index < dy_arr_ptr->size) {
+        size_t element_size = getDataTypeSize(dy_arr_ptr->type);
+        void *destination = (char *)dy_arr_ptr->data + index * element_size;
+        memcpy(destination, value, element_size);
     } else {
         fprintf(stderr, "Index out of bounds.\n");
         exit(EXIT_FAILURE);
