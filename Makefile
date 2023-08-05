@@ -1,38 +1,33 @@
+# Makefile for dynamic array test
+
+# Compiler
 CC = clang
-CFLAGS = -Wall -Wextra -std=c99
-LIBS = -lcheck -lm -lpthread -lrt
 
-SRCDIR = src
-TESTDIR = test
+# Compiler flags
+CFLAGS = -Wall -Wextra -Werror -g
+LDFLAGS = -lcheck -lm
 
-SRCFILES = $(wildcard $(SRCDIR)/*.c)
-HDRFILES = $(wildcard $(SRCDIR)/*.h)
-TESTFILES = $(wildcard $(TESTDIR)/*.c)
+# Source files
+SRC_FILES = array.c testarray.c
 
-SRCOBJS = $(patsubst $(SRCDIR)/%.c, $(SRCDIR)/%.o, $(SRCFILES))
-TESTOBJS = $(patsubst $(TESTDIR)/%.c, $(TESTDIR)/%.o, $(TESTFILES))
+# Object files
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
-TARGET = dynamic_array
-TESTTARGET = test_dynamic_array
+# Output executable
+EXECUTABLE = dynamic_array_test
 
-.PHONY: all clean test
+# Main target
+all: $(EXECUTABLE)
 
-all: $(TARGET)
+$(EXECUTABLE): $(OBJ_FILES)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_FILES) -o $@
 
-$(TARGET): $(SRCOBJS)
-	$(CC) $(CFLAGS) $(SRCOBJS) -o $(TARGET)
-
-$(SRCDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h
+# Compile source files
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Clean up
 clean:
-	rm -f $(SRCOBJS) $(TESTOBJS) $(TARGET) $(TESTTARGET)
+	rm -f $(OBJ_FILES) $(EXECUTABLE)
 
-test: $(TESTTARGET)
-	./$(TESTTARGET)
-
-$(TESTTARGET): $(TESTOBJS) $(SRCOBJS)
-	$(CC) $(CFLAGS) $(TESTOBJS) $(SRCOBJS) -o $(TESTTARGET) $(LIBS)
-
-$(TESTDIR)/%.o: $(TESTDIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+.PHONY: all clean
