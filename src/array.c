@@ -115,6 +115,7 @@ void destroy(DynamicArray *dy_arr_ptr) {
     if (dy_arr_ptr != NULL) {
         free(dy_arr_ptr->data);
         free(dy_arr_ptr);
+        dy_arr_ptr = NULL; // Set pointer to NULL after freeing memory
     }
 }
 
