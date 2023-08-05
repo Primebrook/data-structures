@@ -154,6 +154,11 @@ void print(DynamicArray *dy_arr_ptr) {
     printf("\n");
 }
 
+// Function to free memory of a dynamic array
+void freeDynamicArray(DynamicArray *dy_arr_ptr) {
+    destroy(dy_arr_ptr);
+}
+
 int main() {
     DynamicArray *intArray = initialize(10, INT);
     DynamicArray *floatArray = initialize(10, FLOAT);
@@ -181,10 +186,10 @@ int main() {
     print(doubleArray);
     print(charArray);
 
-    destroy(intArray);
-    destroy(floatArray);
-    destroy(doubleArray);
-    destroy(charArray);
+    freeDynamicArray(intArray);
+    freeDynamicArray(floatArray);
+    freeDynamicArray(doubleArray);
+    freeDynamicArray(charArray);
 
     return 0;
 }
