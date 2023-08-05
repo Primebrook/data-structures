@@ -17,4 +17,5 @@ void test_insert() {
     DynamicArray *modified_dy_arr = insert(dy_arr, pos, value);
 
     assert(dy_arr->size == 1);
+    assert(dy_arr->data[5] == 5000);
 };
