@@ -10,7 +10,7 @@ $(OUTPUT): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 run: $(OUTPUT)
-	bin/test_data_structures
+	@bin/test_data_structures
 
 src/%.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

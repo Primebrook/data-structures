@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-DynamicArray *initialize(int initial_capacity) {
+DynamicArray *initialize(int initial_capacity, int initial_size) {
     DynamicArray *dy_arr_ptr = malloc(sizeof(DynamicArray));
 
     if (dy_arr_ptr == NULL) {
@@ -18,15 +18,15 @@ DynamicArray *initialize(int initial_capacity) {
         exit(EXIT_FAILURE);
     };
 
-    dy_arr_ptr->size = 0;
+    dy_arr_ptr->size = initial_size;
     dy_arr_ptr->capacity = initial_capacity;
     return dy_arr_ptr;
 };
 
 DynamicArray *insert(DynamicArray *dy_arr, int pos, int value) {
     if (dy_arr->size == dy_arr->capacity) {
-        fprintf(stderr, "STACK OVERFLOW!");
-        exit(EXIT_FAILURE);
+        int *new_data = resize(dy_arr->data, 1);
+        dy_arr->data = new_data;
     };
 
     for (int i = dy_arr->size; i >= pos; i--) {
@@ -36,4 +36,13 @@ DynamicArray *insert(DynamicArray *dy_arr, int pos, int value) {
     dy_arr->data[pos] = value; // actual insertion!
     dy_arr->size++;
     return dy_arr;
+};
+
+int *resize(int *data, int size) {
+    int *new_data = (int *)realloc(data, sizeof(int) * (size + 1));
+    if (new_data == NULL) {
+        fprintf(stderr, "Failed to reallocate memory fo dynamic array data.\n");
+        exit(EXIT_FAILURE);
+    };
+    return new_data;
 };
