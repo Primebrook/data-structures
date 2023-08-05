@@ -33,8 +33,6 @@ size_t size(DynamicArray *dy_arr_ptr);
 void clear(DynamicArray *dy_arr_ptr);
 void destroy(DynamicArray *dy_arr_ptr);
 void print(DynamicArray *dy_arr_ptr);
-void checkPointerAndIndex(DynamicArray *dy_arr_ptr, int index);
-size_t getDataTypeSize(DataType type);
 void freeDynamicArray(DynamicArray *dy_arr_ptr);
 
 #endif // ARRAY_H
