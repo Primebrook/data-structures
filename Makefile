@@ -1,25 +1,33 @@
+# Makefile for dynamic array test
+
+# Compiler
 CC = clang
-CFLAGS = -I include/
-DEPS = include/array.h include/test_array.h
-SRC = $(wildcard src/*.c)
-OBJ = $(SRC:.c=.o) 
-OUTPUT = bin/test_data_structures
 
-run: $(OUTPUT)
-	bin/test_data_structures
+# Compiler flags
+CFLAGS = -Wall -Wextra -Werror -g
+LDFLAGS = -lcheck -lm
 
-$(OUTPUT): $(OBJ)
-	mkdir -p bin
-	$(CC) -o $@ $^ $(CFLAGS)
+# Source files
+SRC_FILES = array.c testarray.c
 
-src/%.o: src/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+# Object files
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
-format:
-	@find . -iname "*.c" -o -iname "*.h" | xargs clang-format -i
+# Output executable
+EXECUTABLE = dynamic_array_test
 
+# Main target
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJ_FILES)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_FILES) -o $@
+
+# Compile source files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean up
 clean:
-	rm -rf $(OBJ) bin/
+	rm -f $(OBJ_FILES) $(EXECUTABLE)
 
-.PHONY: format run clean
-
+.PHONY: all clean
