@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define INITIAL_CAPACITY 10
 #define GROWTH_FACTOR 2 // The factor by which the capacity will increase
 
 // Initialize a dynamic array with the given initial capacity and data type
@@ -27,7 +28,7 @@ DynamicArray *initialize(size_t initial_capacity, DataType type) {
 }
 
 // Resize the dynamic array to the new capacity
-void resizeDynamicArray(DynamicArray *dy_arr_ptr, size_t new_capacity) {
+void resize(DynamicArray *dy_arr_ptr, size_t new_capacity) {
     void *new_data = realloc(dy_arr_ptr->data, new_capacity * getDataTypeSize(dy_arr_ptr->type));
     if (new_data == NULL) {
         fprintf(stderr, "Failed to resize dynamic array.\n");
@@ -62,7 +63,7 @@ void add(DynamicArray *dy_arr_ptr, void *value) {
     if (dy_arr_ptr->size == dy_arr_ptr->capacity) {
         // Array is full, resize it
         size_t new_capacity = dy_arr_ptr->capacity * GROWTH_FACTOR;
-        resizeDynamicArray(dy_arr_ptr, new_capacity);
+        resize(dy_arr_ptr, new_capacity);
     }
 
     size_t element_size = getDataTypeSize(dy_arr_ptr->type);
@@ -155,10 +156,10 @@ void freeDynamicArray(DynamicArray *dy_arr_ptr) {
 }
 
 int main() {
-    DynamicArray *intArray = initialize(10, INT);
-    DynamicArray *floatArray = initialize(10, FLOAT);
-    DynamicArray *doubleArray = initialize(10, DOUBLE);
-    DynamicArray *charArray = initialize(10, CHAR);
+    DynamicArray *intArray = initialize(INITIAL_CAPACITY, INT);
+    DynamicArray *floatArray = initialize(INITIAL_CAPACITY, FLOAT);
+    DynamicArray *doubleArray = initialize(INITIAL_CAPACITY, DOUBLE);
+    DynamicArray *charArray = initialize(INITIAL_CAPACITY, CHAR);
 
     int intValue = 42;
     float floatValue = 3.14f;
