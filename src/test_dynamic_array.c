@@ -1,5 +1,5 @@
-#include "test_array.h"
-#include "array.h"
+#include "test_dynamic_array.h"
+#include "dynamic_array.h"
 #include <assert.h>
 #include <stdio.h>
 
@@ -31,7 +31,7 @@ void test_get_at() {
     puts("test_get_at \033[0;32mPASSED.\033[0m");
 };
 
-void test_array() {
+void test_dynamic_array() {
     test_initialize();
     test_set_at();
     test_get_at();
