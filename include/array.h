@@ -6,5 +6,5 @@ typedef struct {
     int *data;
 } DynamicArray;
 
-DynamicArray initialize(size_t initial_capacity);
+DynamicArray initialize(size_t initial_capacity, size_t initial_size);
 void set_at(DynamicArray *dy_arr, size_t pos, int value);
