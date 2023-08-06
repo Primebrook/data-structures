@@ -4,6 +4,10 @@
 #include <stdlib.h>
 
 DynamicArray initialize(size_t initial_capacity, size_t initial_size) {
+	if (initial_size > initial_capacity){
+		fprintf(stderr, "Initial size cannot be greater than initial capacity.\n");
+		exit(EXIT_FAILURE);
+	}
     DynamicArray dy_arr;
 
     dy_arr.data = calloc(initial_size, sizeof(int));
