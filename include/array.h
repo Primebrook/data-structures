@@ -7,3 +7,4 @@ typedef struct {
 } DynamicArray;
 
 DynamicArray initialize(size_t initial_capacity);
+void set_at(DynamicArray *dy_arr, size_t pos, int value);
