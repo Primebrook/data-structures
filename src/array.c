@@ -32,3 +32,32 @@ void set_at(DynamicArray *dy_arr, size_t pos, int value) {
     };
     dy_arr->data[pos] = value;
 };
+
+int get_at(DynamicArray *dy_arr, size_t pos){
+	return 0;	
+}; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
