@@ -6,7 +6,7 @@
 #define INITIAL_CAPACITY 10
 #define INITIAL_SIZE 5
 #define POS 4
-#define VALUE 1245235 
+#define VALUE 1245235
 
 void test_initialize() {
     DynamicArray dy_arr = initialize(INITIAL_CAPACITY, INITIAL_SIZE);
@@ -24,11 +24,15 @@ void test_set_at() {
 };
 
 void test_get_at() {
-	DynamicArray dy_arr = initialize(INITIAL_CAPACITY, INITIAL_SIZE);
-	set_at(&dy_arr, POS, VALUE); 
+    DynamicArray dy_arr = initialize(INITIAL_CAPACITY, INITIAL_SIZE);
+    set_at(&dy_arr, POS, VALUE);
+
+    assert(get_at(&dy_arr, POS) == VALUE);
+    puts("test_get_at \033[0;32mPASSED.\033[0m");
 };
 
 void test_array() {
     test_initialize();
     test_set_at();
+    test_get_at();
 };
