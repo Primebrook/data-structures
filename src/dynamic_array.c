@@ -63,6 +63,11 @@ void insert_at(DynamicArray *dy_arr, size_t pos, int value) {
     };
 };
 
+//What I'd love to see are 3 specific cases:
+//(1) Use an initial size of 0.
+//(2) Insert something in front of the first element. 
+//(3) Insert something after the last element.
+
 void resize(DynamicArray *dy_arr) {
     size_t new_capacity = GROWTH_FACTOR * dy_arr->size;
     dy_arr->capacity = new_capacity;
