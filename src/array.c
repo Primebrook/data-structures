@@ -41,3 +41,9 @@ int get_at(DynamicArray *dy_arr, size_t pos) {
     };
     return dy_arr->data[pos];
 };
+
+void iter_seq(DynamicArray *dy_arr) {
+    for (size_t i = 0; i < dy_arr->size; i++) {
+        printf("%d", dy_arr->data[i]);
+    };
+};
