@@ -9,3 +9,4 @@ typedef struct {
 DynamicArray initialize(size_t initial_capacity, size_t initial_size);
 void set_at(DynamicArray *dy_arr, size_t pos, int value);
 int get_at(DynamicArray *dy_arr, size_t pos);
+void iter_seq(DynamicArray *dy_arr);
