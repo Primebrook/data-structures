@@ -15,3 +15,4 @@ int get_at(DynamicArray *dy_arr, size_t pos);
 void iter_seq(DynamicArray *dy_arr);
 void insert_at(DynamicArray *dy_arr, size_t pos, int value);
 void resize(DynamicArray *dy_arr);
+void delete_last(DynamicArray *dy_arr);

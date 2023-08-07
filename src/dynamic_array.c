@@ -74,3 +74,7 @@ void resize(DynamicArray *dy_arr) {
     };
     dy_arr->data = new_data;
 };
+
+void delete_last(DynamicArray *dy_arr) {
+    dy_arr->size -= !!(dy_arr->size); // double bang FTW!
+};
