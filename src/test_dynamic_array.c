@@ -50,6 +50,7 @@ void test_insert_at() {
 void test_insert_at_1() {
     // when initial_size is 0
     DynamicArray dy_arr = initialize(NULL, 0);
+
     insert_at(&dy_arr, 0, VALUE);
 
     assert(dy_arr.data[0] == VALUE);
@@ -59,13 +60,30 @@ void test_insert_at_1() {
 };
 
 void test_insert_at_2() {
-	// insert something in front of the first element
-    //puts("test_insert_at_2 \033[0;32mPASSED.\033[0m");
+    // insert something in front of the first element
+    int pos = 0;
+    DynamicArray dy_arr = initialize(initial_values, initial_size);
+    int old_value = initial_values[pos];
+
+    insert_at(&dy_arr, pos, VALUE);
+
+    assert(dy_arr.data[pos] == VALUE);
+    assert(dy_arr.data[pos + 1] == old_value);
+    assert(dy_arr.size == initial_size + 1);
+    assert(dy_arr.size < dy_arr.capacity);
+    puts("test_insert_at_2 \033[0;32mPASSED.\033[0m");
 };
 
 void test_insert_at_3() {
-	// insert something after the last element
-    //puts("test_insert_at_3 \033[0;32mPASSED.\033[0m");
+    // insert something after the last element
+    DynamicArray dy_arr = initialize(initial_values, initial_size);
+    int pos = initial_size;
+    insert_at(&dy_arr, pos, VALUE);
+
+    assert(dy_arr.data[pos] == VALUE);
+    assert(dy_arr.size == initial_size + 1);
+    assert(dy_arr.size < dy_arr.capacity);
+    puts("test_insert_at_3 \033[0;32mPASSED.\033[0m");
 };
 
 void test_dynamic_array() {
