@@ -112,6 +112,25 @@ void test_delete_last_1() {
     free(dy_arr.data);
 };
 
+void test_delete_first() {
+    DynamicArray dy_arr = initialize(initial_values, initial_size);
+    delete_first(&dy_arr);
+
+    assert(dy_arr.size == initial_size - 1);
+    assert(dy_arr.data[0] == initial_values[1]);
+    puts("test_delete_first \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
+};
+
+void test_delete_first_1() {
+    // when dy_arr is empty
+    DynamicArray dy_arr = initialize(NULL, 0);
+    delete_first(&dy_arr);
+    assert(dy_arr.size == 0);
+    puts("test_delete_first_1 \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
+};
+
 void test_dynamic_array() {
     test_initialize();
     test_set_at();
@@ -122,4 +141,6 @@ void test_dynamic_array() {
     test_insert_at_3();
     test_delete_last();
     test_delete_last_1();
+    test_delete_first();
+    test_delete_first_1();
 };
