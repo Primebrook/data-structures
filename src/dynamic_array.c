@@ -78,3 +78,9 @@ void resize(DynamicArray *dy_arr) {
 void delete_last(DynamicArray *dy_arr) {
     dy_arr->size -= !!(dy_arr->size); // double bang FTW!
 };
+
+void delete_first(DynamicArray *dy_arr) {
+    int new_size = dy_arr->size - !!dy_arr->size;
+    memmove(dy_arr->data, dy_arr->data + 1, sizeof(int) * new_size);
+    dy_arr->size = new_size;
+};
