@@ -47,6 +47,10 @@ void iter_seq(DynamicArray *dy_arr) {
 };
 
 void insert_at(DynamicArray *dy_arr, size_t pos, int value) {
+    if (dy_arr->size == dy_arr->capacity) {
+        resize(dy_arr);
+    };
+
     if (pos > dy_arr->size) {
         fprintf(stderr,
                 "Specified index is greater than current array size.\n");
@@ -57,19 +61,15 @@ void insert_at(DynamicArray *dy_arr, size_t pos, int value) {
             sizeof(int) * (dy_arr->size - pos));
     dy_arr->size = dy_arr->size + 1;
     set_at(dy_arr, pos, value);
-
-    if (dy_arr->size == dy_arr->capacity) {
-        resize(dy_arr);
-    };
 };
 
-//What I'd love to see are 3 specific cases:
+// What I'd love to see are 3 specific cases:
 //(1) Use an initial size of 0.
-//(2) Insert something in front of the first element. 
+//(2) Insert something in front of the first element.
 //(3) Insert something after the last element.
 
 void resize(DynamicArray *dy_arr) {
-    size_t new_capacity = GROWTH_FACTOR * dy_arr->size;
+    size_t new_capacity = GROWTH_FACTOR * dy_arr->capacity + 1;
     dy_arr->capacity = new_capacity;
 
     int *new_data = realloc(dy_arr->data, new_capacity * sizeof(int));
