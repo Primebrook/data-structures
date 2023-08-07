@@ -121,4 +121,5 @@ void test_dynamic_array() {
     test_insert_at_2();
     test_insert_at_3();
     test_delete_last();
+    test_delete_last_1();
 };
