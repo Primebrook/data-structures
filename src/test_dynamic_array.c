@@ -47,25 +47,25 @@ void test_insert_at() {
     puts("test_insert_at \033[0;32mPASSED.\033[0m");
 };
 
-// What I'd love to see are 3 specific cases:
-//(1) Use an initial size of 0.
-//(2) Insert something in front of the first element.
-//(3) Insert something after the last element.
-
 void test_insert_at_1() {
     // when initial_size is 0
     DynamicArray dy_arr = initialize(NULL, 0);
-    printf("size: %zu\n", dy_arr.size);
-    printf("capacity: %zu\n", dy_arr.capacity);
-
     insert_at(&dy_arr, 0, VALUE);
 
-    printf("size: %zu\n", dy_arr.size);
-    printf("capacity: %zu\n", dy_arr.capacity);
     assert(dy_arr.data[0] == VALUE);
     assert(dy_arr.size == 1);
     assert(dy_arr.capacity == 1);
     puts("test_insert_at_1 \033[0;32mPASSED.\033[0m");
+};
+
+void test_insert_at_2() {
+	// insert something in front of the first element
+    //puts("test_insert_at_2 \033[0;32mPASSED.\033[0m");
+};
+
+void test_insert_at_3() {
+	// insert something after the last element
+    //puts("test_insert_at_3 \033[0;32mPASSED.\033[0m");
 };
 
 void test_dynamic_array() {
@@ -74,4 +74,6 @@ void test_dynamic_array() {
     test_get_at();
     test_insert_at();
     test_insert_at_1();
+    test_insert_at_2();
+    test_insert_at_3();
 };
