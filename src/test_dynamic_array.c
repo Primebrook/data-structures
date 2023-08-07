@@ -19,6 +19,7 @@ void test_initialize() {
     assert(dy_arr.data[2] == 363);
     assert(dy_arr.data[5] == 6126);
     puts("test_initialize \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
 };
 
 void test_set_at() {
@@ -27,6 +28,7 @@ void test_set_at() {
 
     assert(dy_arr.data[POS] == VALUE);
     puts("test_set_at \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
 };
 
 void test_get_at() {
@@ -35,6 +37,7 @@ void test_get_at() {
 
     assert(get_at(&dy_arr, POS) == VALUE);
     puts("test_get_at \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
 };
 
 void test_insert_at() {
@@ -45,6 +48,7 @@ void test_insert_at() {
     assert(dy_arr.size == initial_size + 1);
     assert(dy_arr.size < dy_arr.capacity);
     puts("test_insert_at \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
 };
 
 void test_insert_at_1() {
@@ -57,6 +61,7 @@ void test_insert_at_1() {
     assert(dy_arr.size == 1);
     assert(dy_arr.capacity == 1);
     puts("test_insert_at_1 \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
 };
 
 void test_insert_at_2() {
@@ -72,6 +77,7 @@ void test_insert_at_2() {
     assert(dy_arr.size == initial_size + 1);
     assert(dy_arr.size < dy_arr.capacity);
     puts("test_insert_at_2 \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
 };
 
 void test_insert_at_3() {
@@ -84,6 +90,7 @@ void test_insert_at_3() {
     assert(dy_arr.size == initial_size + 1);
     assert(dy_arr.size < dy_arr.capacity);
     puts("test_insert_at_3 \033[0;32mPASSED.\033[0m");
+    free(dy_arr.data);
 };
 
 void test_dynamic_array() {

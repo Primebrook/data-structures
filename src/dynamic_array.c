@@ -47,7 +47,7 @@ void iter_seq(DynamicArray *dy_arr) {
 };
 
 void insert_at(DynamicArray *dy_arr, size_t pos, int value) {
-    if (dy_arr->size == dy_arr->capacity) {
+    if (dy_arr->size >= dy_arr->capacity) {
         resize(dy_arr);
     };
 
@@ -62,11 +62,6 @@ void insert_at(DynamicArray *dy_arr, size_t pos, int value) {
     dy_arr->size = dy_arr->size + 1;
     set_at(dy_arr, pos, value);
 };
-
-// What I'd love to see are 3 specific cases:
-//(1) Use an initial size of 0.
-//(2) Insert something in front of the first element.
-//(3) Insert something after the last element.
 
 void resize(DynamicArray *dy_arr) {
     size_t new_capacity = GROWTH_FACTOR * dy_arr->capacity + 1;
