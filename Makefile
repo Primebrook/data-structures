@@ -1,6 +1,6 @@
 CC = clang
 CFLAGS = -I include/
-DEPS = include/array.h include/test_array.h
+DEPS = include/dynamic_array.h include/test_dynamic_array.h
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o) 
 OUTPUT = bin/test_data_structures
