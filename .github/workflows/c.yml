@@ -1,0 +1,21 @@
+name: Build and Run
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: build
+        run: make
+      - name: run
+        run: make run
+
