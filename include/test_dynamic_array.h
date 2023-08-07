@@ -7,5 +7,7 @@ void test_insert_at();
 void test_insert_at_1();
 void test_insert_at_2();
 void test_insert_at_3();
+void test_delete_last();
+void test_delete_last_1();
 void test_dynamic_array();
 #endif // TEST_ARRAY_H
