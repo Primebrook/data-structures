@@ -84,3 +84,5 @@ void delete_first(DynamicArray *dy_arr) {
     memmove(dy_arr->data, dy_arr->data + 1, sizeof(int) * new_size);
     dy_arr->size = new_size;
 };
+
+void delete_at(DynamicArray *dy_arr, size_t pos) { return; };
