@@ -50,7 +50,6 @@ void insert_at(DynamicArray *dy_arr, size_t pos, int value) {
     if (dy_arr->size >= dy_arr->capacity) {
         resize(dy_arr);
     };
-
     if (pos > dy_arr->size) {
         fprintf(stderr,
                 "Specified index is greater than current array size.\n");
@@ -85,4 +84,17 @@ void delete_first(DynamicArray *dy_arr) {
     dy_arr->size = new_size;
 };
 
-void delete_at(DynamicArray *dy_arr, size_t pos) { return; };
+void delete_at(DynamicArray *dy_arr, size_t pos) {
+    if (pos == 0) {
+        delete_first(dy_arr);
+        return;
+    };
+    if (pos == dy_arr->size) {
+        delete_last(dy_arr);
+        return;
+    };
+    int new_size = dy_arr->size - 1;
+    memmove(dy_arr->data + pos, dy_arr->data + pos + 1,
+            sizeof(int) * (dy_arr->size - pos));
+    dy_arr->size = dy_arr->size - 1;
+};
