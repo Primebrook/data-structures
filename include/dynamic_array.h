@@ -17,4 +17,4 @@ void insert_at(DynamicArray *dy_arr, size_t pos, int value);
 void resize(DynamicArray *dy_arr);
 void delete_last(DynamicArray *dy_arr);
 void delete_first(DynamicArray *dy_arr);
-void delete_at(DynamicArray *dy_arr, size_t post);
+void delete_at(DynamicArray *dy_arr, size_t pos);

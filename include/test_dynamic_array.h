@@ -11,5 +11,7 @@ void test_delete_last();
 void test_delete_last_1();
 void test_delete_first();
 void test_delete_first_1();
+void test_delete_first_2();
+void test_delete_first_3();
 void test_dynamic_array();
 #endif // TEST_ARRAY_H
