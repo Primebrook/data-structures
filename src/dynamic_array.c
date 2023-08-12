@@ -4,35 +4,58 @@
 #include <stdlib.h>
 #include <string.h>
 
-DynamicArray initialize(int *initial_values, size_t initial_size) {
+
+DynamicArray initialize(void *initial_values, size_t initial_size, DataType type) {
     size_t initial_capacity = GROWTH_FACTOR * initial_size;
 
     DynamicArray dy_arr;
-    dy_arr.data = malloc(initial_capacity * sizeof(int));
+    dy_arr.data = malloc(initial_capacity * getDataTypeSize(type));
     if (dy_arr.data == NULL) {
         fprintf(stderr,
                 "Failed to allocation memory for dynamic array data.\n");
         exit(EXIT_FAILURE);
     };
-    memcpy(dy_arr.data, initial_values, initial_size * sizeof(int));
+    memcpy(dy_arr.data, initial_values, initial_size * getDataTypeSize(type));
 
     dy_arr.size = initial_size;
     dy_arr.capacity = initial_capacity;
     return dy_arr;
 };
 
-void set_at(DynamicArray *dy_arr, size_t pos, int value) {
+
+void set_at(DynamicArray *dy_arr, size_t pos, void* value) {
     assert(dy_arr); // come back to this: is this defo needed?
     assert(dy_arr->data);
+
+int arr[10] = {1,2,3,4,5,6,7,8,9,10};
+void* aa = (void*)arr;
+
+DataType my_type = INT;
+initialize(aa, sizeof(arr), my_type);
+
 
     if (pos >= dy_arr->size) {
         fprintf(stderr, "Specified index is greater than size.\n");
         return;
     };
-    dy_arr->data[pos] = value;
+	
+	switch (dy_arr->type) {
+		case INT:
+			((int*)dy_arr->data)[pos] = *(int*)(value);
+			break;
+		case DOUBLE:
+			((double*)dy_arr->data)[pos] = *(double*)(value);
+			break;
+		case FLOAT:
+			((float*)dy_arr->data)[pos]= *(float*)(value);
+			break;
+		case CHAR:
+			((char*)dy_arr->data)[pos] = *(char*)(value);
+			break;
+	};
 };
 
-int get_at(DynamicArray *dy_arr, size_t pos) {
+void* get_at(DynamicArray *dy_arr, size_t pos) {
     if (pos >= dy_arr->size) {
         fprintf(stderr, "Specified index is greater than size.\n");
         exit(EXIT_FAILURE);
