@@ -10,6 +10,7 @@ List *list_initialize() {
     return list;
 };
 
-void list_set_at(List *list, size_t pos, int value){
-
+void list_set_at(List *list, size_t pos, int value) {
+    (list->head)->value = value;
+    (list->head)->next = NULL;
 };
