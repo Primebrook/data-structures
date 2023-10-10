@@ -11,4 +11,5 @@ typedef struct {
     Node *head;
 } List;
 
-List *linked_list_initialize();
+List *list_initialize();
+void list_set_at(List *list, size_t pos, int value);

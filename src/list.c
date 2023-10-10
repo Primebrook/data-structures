@@ -2,7 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-List *linked_list_initialize() {
-    List *list = malloc(sizeof(int));
+List *list_initialize() {
+    size_t empty_list_size = sizeof(int) + sizeof(void *);
+    List *list = malloc(empty_list_size);
+    Node *head = malloc(sizeof(void *));
+    list->head = head;
     return list;
+};
+
+void list_set_at(List *list, size_t pos, int value){
+
 };

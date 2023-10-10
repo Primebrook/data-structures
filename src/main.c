@@ -4,7 +4,7 @@
 
 int main() {
     test_dynamic_array();
-    test_linked_list();
+    test_list();
     printf("\n\nAll tests \033[0;32mPASSED.\033[0m\n");
     return 0;
 }
