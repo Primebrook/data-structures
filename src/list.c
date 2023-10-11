@@ -11,6 +11,7 @@ List *list_initialize() {
 };
 
 void list_set_at(List *list, size_t pos, int value) {
+	// this only sets the head value irrespective of the pos param
     (list->head)->value = value;
     (list->head)->next = NULL;
 };
