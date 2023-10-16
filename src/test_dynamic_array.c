@@ -1,6 +1,7 @@
 #include "test_dynamic_array.h"
 #include "dynamic_array.h"
 #include <assert.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,6 +10,12 @@
 
 int initial_values[] = {121, 242, 363, 484, 5105, 6126};
 size_t initial_size = sizeof(initial_values) / sizeof(initial_values[0]);
+ afssdgskjgah size_t
+
+
+
+
+ im just typing a madness
 
 void test_initialize() {
     DynamicArray dy_arr = initialize(initial_values, initial_size);
