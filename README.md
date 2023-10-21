@@ -1,7 +1,11 @@
 ### Data Stuctures
 
-1. [Dynamic Array](https://primebrook.notion.site/Dynamic-Array-dd159d946df74332933d692a05d8f768?pvs=4)
-2. _
+1. Dynamic Array
+2. Linked List 
+3. _
+
+
+More details in [notion](https://primebrook.notion.site/Dynamic-Array-dd159d946df74332933d692a05d8f768?pvs=4)
 
 
 This program runs tests on the data structures and their operations. 
