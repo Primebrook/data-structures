@@ -26,3 +26,12 @@ void list_set_at(Node *list, size_t pos, int value) {
 };
 
 size_t length(Node *list) { return 1; };
+
+void list_free(Node *list) {
+    Node *node = list;
+    while (node != NULL) {
+        Node *next_node = node->next;
+        free(node);
+        node = next_node;
+    };
+};
