@@ -7,9 +7,6 @@ struct Node {
     Node *next;
 };
 
-typedef struct {
-    Node *head;
-} List;
-
-List *list_initialize();
-void list_set_at(List *list, size_t pos, int value);
+Node *list_initialize();
+void list_set_at(Node *list, size_t pos, int value);
+size_t length(Node *list);

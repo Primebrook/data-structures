@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 void test_list_initialize() {
-    List *list = list_initialize();
+    Node *list = list_initialize();
     assert(list != NULL);
 
     free(list);
@@ -13,13 +13,15 @@ void test_list_initialize() {
 };
 
 void test_list_set_at_1() {
-    List *list = list_initialize();
+    Node *list = list_initialize();
     list_set_at(list, 0, 4564);
-    assert((list->head)->value == 4564);
+    assert(list->value == 4564);
 
     free(list);
     puts("test_list_set_at_1 \033[0;32mPASSED.\033[0m");
 };
+
+// void test_list_set_at_2() {};
 
 void test_list() {
     test_list_initialize();

@@ -1,17 +1,23 @@
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-List *list_initialize() {
-    size_t empty_list_size = sizeof(int) + sizeof(void *);
-    List *list = malloc(empty_list_size);
-    Node *head = malloc(sizeof(void *));
-    list->head = head;
-    return list;
+// *head = (Node){0}
+Node *list_initialize() {
+    Node *head = malloc(sizeof(Node));
+    head->value = 0;
+    head->next = NULL;
+    return head;
 };
 
-void list_set_at(List *list, size_t pos, int value) {
-	// this only sets the head value irrespective of the pos param
-    (list->head)->value = value;
-    (list->head)->next = NULL;
+void list_set_at(Node *list, size_t pos, int value) {
+    int len = length(list);
+    if (len <= pos) {
+        fprintf(stderr, "Failed to set value: position is greater than current "
+                        "list length.\n");
+        exit(EXIT_FAILURE);
+    };
 };
+
+size_t length(Node *list) { return 1; };
