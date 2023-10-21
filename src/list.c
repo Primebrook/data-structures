@@ -6,6 +6,10 @@
 // *head = (Node){0}
 Node *list_initialize() {
     Node *head = malloc(sizeof(Node));
+    if (head == NULL) {
+        fprintf(stderr, "Failed to allocate memory for list.");
+        exit(EXIT_FAILURE);
+    };
     head->value = 0;
     head->next = NULL;
     return head;
