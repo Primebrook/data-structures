@@ -25,7 +25,15 @@ void list_set_at(Node *list, size_t pos, int value) {
     list->value = value;
 };
 
-size_t length(Node *list) { return 1; };
+size_t length(Node *list) {
+    Node *node = list;
+    size_t len = 0;
+    while (node != NULL) {
+        node = node->next;
+        len++;
+    };
+    return len;
+};
 
 void list_free(Node *list) {
     Node *node = list;
