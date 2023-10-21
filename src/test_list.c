@@ -21,7 +21,7 @@ void test_length_1() {
 };
 
 // void test_length_2() {
-//     Node *list = list_initialize();
+//	Node *list = list_initialize();
 // };
 
 void test_list_set_at_1() {
@@ -37,5 +37,5 @@ void test_list() {
     test_list_initialize();
     test_list_set_at_1();
     test_length_1();
-    //test_length_2();
+    // test_length_2();
 };
