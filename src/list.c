@@ -15,14 +15,14 @@ Node *list_initialize() {
     return head;
 };
 
-// void list_set_at(Node *list, size_t pos, int value) {
-//     int len = length(list);
-//     if (len <= pos) {
-//         fprintf(stderr, "Failed to set value: position is greater than
-//         current "
-//                         "list length.\n");
-//         exit(EXIT_FAILURE);
-//     };
-// };
-//
-// size_t length(Node *list) { return 1; };
+void list_set_at(Node *list, size_t pos, int value) {
+    size_t len = length(list);
+    if (len <= pos) {
+        fprintf(stderr, "_");
+        exit(EXIT_FAILURE);
+    };
+
+    list->value = value;
+};
+
+size_t length(Node *list) { return 1; };
