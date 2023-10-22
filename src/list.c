@@ -35,6 +35,28 @@ void list_push(Node *list, int value) {
     node->next = new_node;
 };
 
+void list_insert(Node *list, size_t pos, int value) {
+    size_t len = list_length(list);
+    if (pos > len) {
+        fprintf(stderr, "Failed to allocate memory for node.");
+        exit(EXIT_FAILURE);
+    };
+    if (pos == len) {
+        list_push(list, value);
+    };
+
+    Node *node = list;
+    for (size_t i = 0; i < pos - 1; i++) {
+        node = node->next;
+    };
+
+    Node *new_node = node_initialize(value);
+    Node *next_node = (node->next)->next;
+
+    node->next = new_node;
+    new_node->next = next_node;
+};
+
 size_t list_length(Node *list) {
     Node *node = list;
     size_t len = 0;
