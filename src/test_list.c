@@ -29,6 +29,14 @@ void test_list_push_2() {
     puts("test_list_push_2 \033[0;32mPASSED.\033[0m");
 };
 
+void test_list_insert() {
+    Node *list = list_initialize();
+    list_insert(list, 1, 22);
+    assert((list->next)->value == 22);
+    assert((list->next)->next == NULL);
+    puts("test_list_insert \033[0;32mPASSED.\033[0m");
+};
+
 void test_list_length_1() {
     Node *list = list_initialize();
     size_t len = list_length(list);
@@ -42,4 +50,5 @@ void test_list() {
     test_list_length_1();
     test_list_push_1();
     test_list_push_2();
+    test_list_insert();
 };
