@@ -71,6 +71,20 @@ void list_set_at(Node *list, size_t pos, int value) {
     node->value = value;
 };
 
+int list_get_at(Node *list, size_t pos) {
+    size_t len = list_length(list);
+    if (pos >= len) {
+        fprintf(stderr, "Cannot access position greater than list length.\n");
+        exit(EXIT_FAILURE);
+    };
+
+    Node *node = list;
+    for (size_t i = 0; i < pos; i++) {
+        node = node->next;
+    };
+    return node->value;
+};
+
 size_t list_length(Node *list) {
     Node *node = list;
     size_t len = 0;
